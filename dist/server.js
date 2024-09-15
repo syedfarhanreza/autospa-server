@@ -14,11 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const app_1 = __importDefault(require("./app"));
-const config_1 = __importDefault(require("./app/config"));
 const port = process.env.PORT || 5000;
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(`mongodb+srv://${config_1.default.dbUser}:${config_1.default.dbPass}@cluster0.xbiw867.mongodb.net/${config_1.default.dbName}`);
+        yield mongoose_1.default.connect("mongodb://127.0.0.1:27017/test");
         console.log("Connected to MongoDB");
         app_1.default.listen(port, () => {
             console.log(`Server is running on port ${port}`);
