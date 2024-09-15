@@ -1,5 +1,8 @@
 import dotenv from "dotenv";
-dotenv.config();
+import path from "path";
+
+dotenv.config({ path: path.join((process.cwd(), ".env")) });
+
 const Config = {
   database_url: process.env.DATABASE_URL,
   bcrypt_salt_rounds: process.env.SALT_ROUND,
