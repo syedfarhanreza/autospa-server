@@ -2,6 +2,7 @@
 import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../Modules/user/user.model";
+import AppError from "../errors/AppError";
 
 export const isAuthenticatedUser = async (
   req: any,
@@ -49,7 +50,7 @@ export const authorizeRoles = (...roles: any) => {
   return (req: any, res: Response, next: NextFunction) => {
     if (!roles.includes(req.user?.role)) {
       return next(
-        new Error(
+        new AppError(
           403,
           `User type: ${req.user?.role} is not allowed to access this resource `
         )

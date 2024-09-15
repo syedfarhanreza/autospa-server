@@ -2,8 +2,8 @@
 import { JwtPayload } from "jsonwebtoken";
 import { catchAsyncError } from "../../../utils/catchAsyncError";
 import sendResponse from "../../../utils/sendResponse";
-import { sendImageToCloudinary } from "../../../utils/uploadFile";
 import QueryBuilder from "../../builder/QueryBuilder";
+import { sendImageToCloudinary } from "../../../utils/uploadFile";
 import User from "./user.model";
 
 export const updateUserProfileImage = catchAsyncError(async (req, res) => {
