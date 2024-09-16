@@ -3,14 +3,12 @@
 import bcrypt from "bcrypt";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { catchAsyncError } from "../../../utils/catchAsyncError";
-import {
-  createAcessToken as createAccessToken,
-  createRefreshToken,
-} from "../../../utils/jwtToken";
-import sendMessage from "../../../utils/sendMessage";
+
 import sendResponse from "../../../utils/sendResponse";
 import User from "../user/user.model";
 import Authentication from "./auth.model";
+import { createAccessToken, createRefreshToken } from "../../../utils/jwtToken";
+import sendMessage from "../../../utils/sendMessage";
 
 export const authSateController = catchAsyncError(async (req, res) => {
   const auth = req.user as JwtPayload;
