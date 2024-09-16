@@ -1,6 +1,9 @@
 import cors from "cors";
 import express from "express";
 import morgan from "morgan";
+import router from "../src/app/routes/index";
+import errorMiddleware from "./app/middlewares/error";
+import { notFound } from "./app/middlewares/not-found";
 
 const app = express();
 
@@ -13,8 +16,13 @@ app.use(
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.use("/api", router);
 app.get("/", (req, res) => {
-  res.send("Hello from AutoSpa server");
+  res.send("Welcome To Autospa");
 });
+// 404 Handler
+app.use(notFound);
+
+app.use(errorMiddleware);
 
 export default app;
