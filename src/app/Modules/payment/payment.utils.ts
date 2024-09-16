@@ -26,9 +26,9 @@ export const initiatePayment = async (
     currency: "BDT",
     amount,
     tran_id,
-    success_url: `https://autospa-server.vercel.app//api/payment/success?pt=${PT}`,
-    fail_url: `https://autospa-server.vercel.app//api/payment/fail?pt=${PT}`,
-    cancel_url: `https://autospa-server.vercel.app//api/payment/fail?pt=${PT}`,
+    success_url: `https://autospa-server.vercel.app/api/payment/success?pt=${PT}`,
+    fail_url: `https://autospa-server.vercel.app/api/payment/fail?pt=${PT}`,
+    cancel_url: `https://autospa-server.vercel.app/api/payment/fail?pt=${PT}`,
     desc: "Course Fee",
     type: "json",
   });

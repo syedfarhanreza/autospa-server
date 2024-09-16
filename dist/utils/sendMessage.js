@@ -12,21 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const app_1 = __importDefault(require("./app"));
-const config_1 = __importDefault(require("./app/config"));
-const port = process.env.PORT || 5000;
-const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
+const nodemailer_1 = __importDefault(require("nodemailer"));
+const sendMessage = (senderMail, receiverMail, subject, html) => __awaiter(void 0, void 0, void 0, function* () {
+    const transporter = nodemailer_1.default.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false,
+        auth: {
+            user: process.env.MAIL,
+            pass: process.env.MAILPASS,
+        },
+        tls: {
+            rejectUnauthorized: true,
+        },
+    });
+    const mailOptions = {
+        from: senderMail,
+        to: receiverMail,
+        subject: subject,
+        html: html,
+    };
     try {
-        yield mongoose_1.default.connect(config_1.default.database_url);
-        console.log("Connected to MongoDB");
-        app_1.default.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
-        });
+        yield transporter.sendMail(mailOptions);
     }
     catch (error) {
-        console.error("Failed to connect to MongoDB", error);
-        process.exit(1);
+        console.error("Error sending email:", error);
+        throw error;
     }
 });
-startServer();
+exports.default = sendMessage;

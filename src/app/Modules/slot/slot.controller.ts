@@ -1,5 +1,6 @@
 import { catchAsyncError } from "../../../utils/catchAsyncError";
 import sendResponse from "../../../utils/sendResponse";
+import Service from "../service/service.model";
 import slotService from "./slot.service";
 
 const {

@@ -18,7 +18,7 @@ app.use(morgan("dev"));
 
 app.use("/api", router);
 app.get("/", (req, res) => {
-  res.send("Welcome To Autospa");
+  res.send("Welcome To AutoSpa");
 });
 // 404 Handler
 app.use(notFound);

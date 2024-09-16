@@ -3,6 +3,7 @@ import { NextFunction, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../Modules/user/user.model";
 import AppError from "../errors/AppError";
+import Authentication from "../Modules/auth/auth.model";
 
 export const isAuthenticatedUser = async (
   req: any,

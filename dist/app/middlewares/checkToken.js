@@ -12,21 +12,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const app_1 = __importDefault(require("./app"));
-const config_1 = __importDefault(require("./app/config"));
-const port = process.env.PORT || 5000;
-const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
+exports.isValidToken = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const isValidToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield mongoose_1.default.connect(config_1.default.database_url);
-        console.log("Connected to MongoDB");
-        app_1.default.listen(port, () => {
-            console.log(`Server is running on port ${port}`);
-        });
+        const getToken = req.header("Authorization");
+        if (!getToken)
+            return res.status(400).json({ msg: "Invalid Authentication." });
+        const token = getToken.split(" ")[1];
+        if (!token) {
+            return res.status(204).json({
+                success: false,
+                message: "No token",
+            });
+        }
+        const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_ACCESS_SECRET);
+        if (!decoded)
+            return res.status(400).json({ msg: "Invalid Authentication." });
+        req.userInfo = decoded.user;
+        next();
     }
-    catch (error) {
-        console.error("Failed to connect to MongoDB", error);
-        process.exit(1);
+    catch (err) {
+        return res.status(500).json({ msg: err.message });
     }
 });
-startServer();
+exports.isValidToken = isValidToken;
