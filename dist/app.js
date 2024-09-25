@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cors_1 = __importDefault(require("cors"));
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
-const index_1 = __importDefault(require("../src/app/routes/index"));
+const index_1 = __importDefault(require("./app/routes/index"));
 const error_1 = __importDefault(require("./app/middlewares/error"));
 const not_found_1 = require("./app/middlewares/not-found");
 const app = (0, express_1.default)();
