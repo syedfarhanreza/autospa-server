@@ -14,12 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createReviewService = exports.getReviewService = void 0;
 const review_model_1 = __importDefault(require("./review.model"));
-const getReviewService = (limit, page) => __awaiter(void 0, void 0, void 0, function* () {
-    const curtpage = (page || 1) - 1;
+const getReviewService = (limit) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield review_model_1.default.find()
         .populate("user")
         .sort({ createdAt: -1 })
-        .skip(curtpage * (limit || 2))
         .limit(limit || 2);
     const totalDoc = yield review_model_1.default.countDocuments();
     return { totalDoc, result };

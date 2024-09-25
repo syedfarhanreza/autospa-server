@@ -19,10 +19,8 @@ export const createReview = catchAsyncError(async (req, res) => {
 });
 export const getReviews = catchAsyncError(async (req, res) => {
   const limit = req.query.limit || 2;
-  const page = req.query.page || 1;
   const { result, totalDoc } = await reviewService.getReviewService(
-    Number(limit),
-    Number(page)
+    Number(limit)
   );
   res.json({
     data: result,
