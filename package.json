@@ -2,16 +2,12 @@
   "name": "autospa-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:prod": "node ./dist/server.js",
-    "start:dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "start:dev": "ts-node-dev --respawn --transpile-only --env-file=.env src/server.ts",
     "build": "tsc",
-    "lint": "npx eslint src --ignore-pattern .ts",
-    "lint:fix": "npx eslint src --fix",
-    "prettier": "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\"",
-    "prettier:fix": "npx prettier --write src"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "vercel-build": "echo hello"
   },
   "keywords": [],
   "author": "",
