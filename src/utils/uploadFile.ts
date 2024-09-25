@@ -2,17 +2,23 @@ import fs from "fs";
 import multer from "multer";
 import cloudinary from "../app/config/cloud";
 
+// Get Cloudinary folder name from environment variables
+const cloudinaryFolder = process.env.CN_Folder || "default-folder";
+
 export const sendImageToCloudinary = (imageName: string, path: string) => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(
       path,
-      { public_id: imageName },
+      {
+        public_id: imageName,
+        folder: cloudinaryFolder, // Set the folder here
+      },
       function (error, result) {
         if (error) {
           reject(error);
         }
         resolve(result);
-        // delete a file asynchronously
+        // delete a file asynchronously after upload
         fs.unlink(path, (err) => {
           if (err) {
             console.log(err);
